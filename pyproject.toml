@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "onesignal-flet"
+version = "0.1.0"
+description = "Flutter OneSignal package integration for Python Flet."
+authors = ["brunobrown <brunobrown.86@gmail.com>"]
+readme = "README.md"
+# Inclui o diretório Flutter no pacote
+include = ["flutter_onesignal/**"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flet = "^0.25.2"
+
+
+[tool.flet]
+#org = "dev.flet"
+product = "OneSiginal Flet"
+company = "OneSiginal Flet"
+#copyright = ""
+# build_number = 1 # --build-number
+app.module = "main.py"
+compile.cleanup = true # --cleanup-on-compile
+
+[tool.flet.flutter.dependencies]
+flet_onesignal.path = "/home/bruno_brown/PycharmProjects/onesignal-flet/flet_onesignal"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
