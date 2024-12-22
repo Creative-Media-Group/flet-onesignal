@@ -5,7 +5,7 @@ description = "Flutter OneSignal package integration for Python Flet."
 authors = ["brunobrown <brunobrown.86@gmail.com>"]
 readme = "README.md"
 # Inclui o diretório Flutter no pacote
-include = ["flutter_onesignal/**"]
+include = ["flet_onesignal"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
