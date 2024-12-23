@@ -1,7 +1,8 @@
 name: flet_onesignal
 description: "Flutter OneSignal package integration for Python Flet."
 version: 0.0.1
-homepage:
+#homepage: https://github.com/brunobrown/onesignal-flet
+repository: https://github.com/brunobrown/onesignal-flet
 
 environment:
   sdk: ^3.5.2
