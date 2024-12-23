@@ -22,7 +22,7 @@ app.module = "main.py"
 compile.cleanup = true # --cleanup-on-compile
 
 [tool.flet.flutter.dependencies]
-flet_onesignal.path = "/home/bruno_brown/PycharmProjects/onesignal-flet/flet_onesignal"
+flet_onesignal.path = "/home/bruno_brown/PycharmProjects/onesignal-flet/onesignal_flet/flet_onesignal"
 
 [build-system]
 requires = ["poetry-core"]
