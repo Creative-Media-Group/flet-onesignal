@@ -6,6 +6,8 @@
 
 Flutter OneSignal package integration for Python Flet
 
+[Flet OneSignal](https://pub.dev/packages?q=flet_onesignal) in the official package repository for Dart and Flutter apps.
+
 ---
 
 ## Installation
