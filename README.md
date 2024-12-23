@@ -2,4 +2,103 @@
 
 ---
 
-###  Flutter OneSignal package integration for Python Flet 
+## Description
+
+Flutter OneSignal package integration for Python Flet
+
+---
+
+## Installation
+
+**Using POETRY**
+
+```console
+$ poetry add git+https://github.com/brunobrown/onesignal-flet.git#main
+```
+
+**Using PIP**
+
+```console
+$ pip install git+https://github.com/brunobrown/onesignal-flet.git@main
+```
+
+---
+
+## Example configuration in the `pyproject.toml` file.
+
+[More in ](https://flet.dev/blog/pyproject-toml-support-for-flet-build-command/) Support for flet build command.
+
+```toml
+[tool.poetry]
+name = "example-flet-app"
+version = "0.1.0"
+description = ""
+authors = ["brunobrown <brunobrown.86@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flet = "^0.25.2"
+onesignal_flet = {git = "https://github.com/brunobrown/onesignal-flet.git", rev = "main"}
+
+[tool.flet.flutter.dependencies]
+flet_onesignal = "^0.0.1"
+# OR ABSOLUTE PATH TO FLUTTER/FLET INTEGRATION PACKAGE IN VIRTUALENVS. EXAMPLE:
+#flet_onesignal.path = "/home/bruno_brown/.cache/pypoetry/virtualenvs/flet-lib-r1Rhj3ZD-py3.12/lib/python3.12/site-packages/onesignal_flet/flet_onesignal/"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+```
+
+### Example of in-app usage
+
+```Python
+import flet as ft
+from onesignal_flet.control import OneSignal
+
+ONESIGNAL_APP_ID = ''   # https://onesignal.com     <---
+
+
+def main(page: ft.Page):
+    one_signal = OneSignal(app_id=ONESIGNAL_APP_ID)
+
+    title = ft.Text(
+        value='OneSignal - Test',
+        size=20,
+    )
+
+    message = ft.Text(
+        value='Push notification message here',
+        size=20,
+    )
+
+    container = ft.Container(
+        expand=True,
+        alignment=ft.alignment.center,
+        content=ft.Column(
+            expand=True,
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                title,
+                ft.Container(
+                    width=page.width * 0.3,
+                    content=ft.Divider(color=ft.Colors.BLACK),
+                ),
+                message
+            ]
+        )
+    )
+
+    page.add(
+        one_signal,
+        container
+    )
+
+
+if __name__ == "__main__":
+    ft.app(target=main)
+
+```
