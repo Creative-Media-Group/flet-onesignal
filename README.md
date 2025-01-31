@@ -15,13 +15,13 @@ Flutter OneSignal package integration for Python Flet
 **Using POETRY**
 
 ```console
-$ poetry add git+https://github.com/brunobrown/onesignal-flet.git#main
+$ poetry add onesignal-flet
 ```
 
 **Using PIP**
 
 ```console
-$ pip install git+https://github.com/brunobrown/onesignal-flet.git@main
+$ pip install onesignal-flet
 ```
 
 ---
