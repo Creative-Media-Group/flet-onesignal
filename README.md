@@ -45,8 +45,8 @@ onesignal_flet = {git = "https://github.com/brunobrown/onesignal-flet.git", rev 
 
 [tool.flet.flutter.dependencies]
 flet_onesignal = "^0.0.1"
-# OR ABSOLUTE PATH TO FLUTTER/FLET INTEGRATION PACKAGE IN VIRTUALENVS. EXAMPLE:
-#flet_onesignal.path = "/home/bruno_brown/.cache/pypoetry/virtualenvs/flet-lib-r1Rhj3ZD-py3.12/lib/python3.12/site-packages/onesignal_flet/flet_onesignal/"
+# OR ABSOLUTE PATH TO FLUTTER/FLET INTEGRATION PACKAGE. EXAMPLE:
+#flet_onesignal.path = "/home/<user>/path/to/package/flet_onesignal"
 
 [build-system]
 requires = ["poetry-core"]
