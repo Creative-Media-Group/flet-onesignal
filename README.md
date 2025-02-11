@@ -1,12 +1,12 @@
-# Flet OneSignal
+# Flet FletOneSignal
 
 ---
 
 ## Description
 
-Flutter OneSignal package integration for Python Flet
+Flutter FletOneSignal package integration for Python Flet
 
-[Flet OneSignal](https://pub.dev/packages?q=flet_onesignal) in the official package repository for Dart and Flutter apps.
+[Flet FletOneSignal](https://pub.dev/packages?q=flet_onesignal) in the official package repository for Dart and Flutter apps.
 
 ---
 
@@ -59,16 +59,16 @@ build-backend = "poetry.core.masonry.api"
 
 ```Python
 import flet as ft
-from onesignal_flet.control import OneSignal
+from onesignal_flet.control import FletOneSignal
 
 ONESIGNAL_APP_ID = ''   # https://onesignal.com     <---
 
 
 def main(page: ft.Page):
-    one_signal = OneSignal(app_id=ONESIGNAL_APP_ID)
+    one_signal = FletOneSignal(app_id=ONESIGNAL_APP_ID)
 
     title = ft.Text(
-        value='OneSignal - Test',
+        value='FletOneSignal - Test',
         size=20,
     )
 

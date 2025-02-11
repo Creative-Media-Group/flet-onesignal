@@ -30,12 +30,12 @@ class OneSignalControlState extends State<OneSignalControl> {
       // Verify that the application ID was provided
       // Verifica se o App ID foi fornecido
       if (appId.isEmpty) {
-        debugPrint("OneSignal App ID not provided. | OneSignal App ID não fornecido.");
+        debugPrint("FletOneSignal App ID not provided. | FletOneSignal App ID não fornecido.");
         return;
       }
 
-      // Start OneSignal with App ID
-      // Iniciar o OneSignal com o App ID
+      // Start FletOneSignal with App ID
+      // Iniciar o FletOneSignal com o App ID
       OneSignal.initialize(appId);
 
       // Optional Settings
@@ -43,9 +43,9 @@ class OneSignalControlState extends State<OneSignalControl> {
       OneSignal.consentRequired(false);
       OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
 
-      debugPrint("OneSignal initialized successfully! | OneSignal inicializado com sucesso!");
+      debugPrint("FletOneSignal initialized successfully! | FletOneSignal inicializado com sucesso!");
     } catch (e) {
-      debugPrint("Error initializing OneSignal | Erro ao inicializar o OneSignal: $e");
+      debugPrint("Error initializing FletOneSignal | Erro ao inicializar o FletOneSignal: $e");
     }
   }
 

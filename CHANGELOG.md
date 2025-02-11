@@ -1,4 +1,4 @@
-# OneSignal Flet changelog
+# FletOneSignal Flet changelog
 ___
 
 ## `0.2.0` - 2025-01-31

@@ -1,10 +1,10 @@
 import 'package:flet/flet.dart';
-import 'onesignal_control.dart';
+import 'flet_onesignal.dart';
 
 
 CreateControlFactory createControl = (CreateControlArgs args) {
   switch (args.control.type) {
-    case 'onesignal_flet':
+    case 'flet-onesignal':
       if (args.parent == null) {
         throw ArgumentError('Parent cannot be null');
       }
