@@ -58,7 +58,7 @@ dev-dependencies = [
 ]
 
 [tool.flet.flutter.dependencies]
-flet_onesignal = "^0.0.1"
+flet_onesignal = "^0.0.2"
 
 ```
 

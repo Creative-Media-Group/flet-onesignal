@@ -1,5 +1,5 @@
-# Flet FletOneSignal
+# Flet OneSignal
 
 ---
 
-###  Flutter FletOneSignal package integration for Python Flet 
+###  Flutter OneSignal package integration for Python Flet 
