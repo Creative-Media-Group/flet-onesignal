@@ -1,11 +1,17 @@
-[tool.poetry]
+[project]
 name = "flet-onesignal"
 version = "0.1.0"
 description = "Flutter FletOneSignal package integration for Python Flet."
-authors = ["brunobrown <brunobrown.86@gmail.com>"]
-license = "MIT"
 readme = "README.md"
-packages = [{include = "flet-onesignal"}]
+authors = [
+    { name = "brunobrown", email = "brunobrown.86@gmail.com" }
+]
+
+[project.urls]
+Homepage = "https://github.com/brunobrown/flet-onesignal"
+Documentation = ""
+Repository = "https://github.com/brunobrown/flet-onesignal"
+Issues = "https://github.com/brunobrown/flet-onesignal/issues"
 
 classifiers = [
     "Topic :: Software Development :: Debuggers",
@@ -20,14 +26,24 @@ classifiers = [
     "Programming Language :: Python :: 3.12"
 ]
 
-[tool.poetry.urls]
-"GitHub" = "https://github.com/brunobrown/flet-onesignal"
-"Bug Tracker" = "https://github.com/brunobrown/flet-onesignal/issues"
+requires-python = ">=3.9"
+dependencies = [
+    "flet>=0.26.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-flet = "^0.26.0"
+[tool.setuptools]
+packages = ["flet_onesignal"]
+package-dir = {"" = "src"}
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+#[build-system]
+#requires = ["hatchling"]
+#build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "flet[all]>=0.26.0",
+]

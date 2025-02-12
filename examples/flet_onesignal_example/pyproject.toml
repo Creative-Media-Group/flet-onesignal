@@ -1,0 +1,22 @@
+[project]
+name = "flet-onesignal-example"
+version = "1.0.0"
+description = "flet-onesignal-example"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    { name = "developer", email = "you@example.com" }
+]
+
+dependencies = [
+    "flet>=0.26.0",
+    "flet-onesignal @ file:///home/bruno_brown/PycharmProjects/flet-onesignal",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "flet[all]>=0.26.0",
+]
+
+[tool.flet.flutter.dependencies]
+flet_onesignal = "^0.0.1"
