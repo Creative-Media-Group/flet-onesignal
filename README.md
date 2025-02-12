@@ -1,12 +1,12 @@
-# Flet FletOneSignal
+# Flet OneSignal
 
 ---
 
 ## Description
 
-Flutter FletOneSignal package integration for Python Flet
+Flutter OneSignal package integration for Python Flet.
 
-[Flet FletOneSignal](https://pub.dev/packages?q=flet_onesignal) in the official package repository for Dart and Flutter apps.
+[Flet OneSignal](https://pub.dev/packages?q=flet_onesignal) in the official package repository for Dart and Flutter apps.
 
 ---
 
@@ -15,13 +15,19 @@ Flutter FletOneSignal package integration for Python Flet
 **Using POETRY**
 
 ```console
-$ poetry add onesignal-flet
+$ poetry add flet-onesignal
 ```
 
 **Using PIP**
 
 ```console
-$ pip install onesignal-flet
+$ pip install flet-onesignal
+```
+
+**Using UV**
+
+```console
+$ uv add flet-onesignal
 ```
 
 ---
@@ -31,27 +37,28 @@ $ pip install onesignal-flet
 [More in ](https://flet.dev/blog/pyproject-toml-support-for-flet-build-command/) Support for flet build command.
 
 ```toml
-[tool.poetry]
-name = "example-flet-app"
+[project]
+name = "flet-onesignal-example"
 version = "0.1.0"
-description = ""
-authors = ["brunobrown <brunobrown.86@gmail.com>"]
+description = "flet-onesignal-example"
 readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    { name = "developer", email = "you@example.com" }
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-flet = "^0.25.2"
-onesignal_flet = {git = "https://github.com/brunobrown/onesignal-flet.git", rev = "main"}
+dependencies = [
+    "flet>=0.26.0",
+    "flet-onesignal>=0.1.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "flet[all]>=0.26.0",
+]
 
 [tool.flet.flutter.dependencies]
 flet_onesignal = "^0.0.1"
-# OR ABSOLUTE PATH TO FLUTTER/FLET INTEGRATION PACKAGE. EXAMPLE:
-#flet_onesignal.path = "/home/<user>/path/to/package/flet_onesignal"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
 
 ```
 
@@ -59,13 +66,13 @@ build-backend = "poetry.core.masonry.api"
 
 ```Python
 import flet as ft
-from onesignal_flet.control import FletOneSignal
+from flet_onesignal.flet_onesignal import FletOneSignal
 
 ONESIGNAL_APP_ID = ''   # https://onesignal.com     <---
 
 
 def main(page: ft.Page):
-    one_signal = FletOneSignal(app_id=ONESIGNAL_APP_ID)
+    onesignal = FletOneSignal(app_id=ONESIGNAL_APP_ID)
 
     title = ft.Text(
         value='FletOneSignal - Test',
@@ -95,7 +102,7 @@ def main(page: ft.Page):
     )
 
     page.add(
-        one_signal,
+        onesignal,
         container
     )
 

@@ -1,7 +1,7 @@
 [project]
 name = "flet-onesignal"
 version = "0.1.0"
-description = "Flutter FletOneSignal package integration for Python Flet."
+description = "Flutter OneSignal package integration for Python Flet."
 readme = "README.md"
 authors = [
     { name = "brunobrown", email = "brunobrown.86@gmail.com" }
