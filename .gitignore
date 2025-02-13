@@ -238,3 +238,5 @@ poetry.toml
 pyrightconfig.json
 
 #main.py
+src/flutter/flet_onesignal/analysis_options.yaml
+src/flutter/flet_onesignal/.fvmrc
