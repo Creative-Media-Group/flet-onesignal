@@ -20,6 +20,3 @@ dev-dependencies = [
 
 [tool.poetry.group.dev.dependencies]
 flet = {extras = ["all"], version = "0.26.0"}
-
-[tool.flet.flutter.dependencies]
-flet_onesignal = "^0.0.2"
