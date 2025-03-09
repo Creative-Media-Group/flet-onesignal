@@ -49,16 +49,13 @@ authors = [
 
 dependencies = [
     "flet>=0.26.0",
-    "flet-onesignal>=0.1.0",
+    "flet-onesignal>=0.2.0",
 ]
 
 [tool.uv]
 dev-dependencies = [
     "flet[all]>=0.26.0",
 ]
-
-[tool.flet.flutter.dependencies]
-flet_onesignal = "^0.0.2"
 
 ```
 
