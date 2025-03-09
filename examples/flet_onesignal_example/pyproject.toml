@@ -1,0 +1,22 @@
+[project]
+name = "flet-onesignal-example"
+version = "0.1.0"
+description = "flet-onesignal-example"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    { name = "developer", email = "you@example.com" }
+]
+
+dependencies = [
+    "flet>=0.26.0",
+    "flet-onesignal>=0.2.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "flet[all]>=0.26.0",
+]
+
+[tool.poetry.group.dev.dependencies]
+flet = {extras = ["all"], version = "0.26.0"}

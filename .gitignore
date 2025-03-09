@@ -237,4 +237,6 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
-main.py
+#main.py
+src/flutter/flet_onesignal/analysis_options.yaml
+src/flutter/flet_onesignal/.fvmrc
