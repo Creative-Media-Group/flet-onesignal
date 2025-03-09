@@ -1,6 +1,6 @@
 [project]
 name = "flet-onesignal"
-version = "0.3.0"
+version = "0.3.1"
 description = "Flutter OneSignal package integration for Python Flet."
 readme = "README.md"
 authors = [

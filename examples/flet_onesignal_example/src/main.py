@@ -2,7 +2,7 @@ import flet as ft
 import flet_onesignal as fos
 from functools import partial
 
-YOUR_APP_ID = "example-123a-12a3-1a23-abcd1ef23g45"
+ONESIGNAL_APP_ID = "example-123a-12a3-1a23-abcd1ef23g45"
 
 
 async def main(page: ft.Page):
@@ -68,7 +68,7 @@ async def main(page: ft.Page):
         list_view.update()
 
     onesignal = fos.OneSignal(
-        settings=fos.OneSignalSettings(app_id=YOUR_APP_ID),
+        settings=fos.OneSignalSettings(app_id=ONESIGNAL_APP_ID),
         on_notification_opened=handle_notification_opened,
         on_notification_received=handle_notification_received,
         on_click_in_app_messages=handle_click_in_app_messages,
