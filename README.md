@@ -59,7 +59,7 @@ dev-dependencies = [
 
 ```
 
-### Example of in-app usage
+### Usage example
 
 ```Python
 import flet as ft
