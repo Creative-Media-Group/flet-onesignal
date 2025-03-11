@@ -203,4 +203,8 @@ Contributions and feedback are welcome!
 
 ---
 
-## 🚀 Try **flet-onesignal** today and enhance your Flet apps with push notifications!🔔 
+## 🚀 Try **flet-onesignal** today and enhance your Flet apps with push notifications!🔔
+
+<img src="https://logging-discord.readthedocs.io/en/latest/img/proverbs_16_3.jpg" width="500">
+
+[Commit your work to the LORD, and your plans will succeed. Proverbs 16: 3](https://www.bible.com/bible/116/PRO.16.NLT)
