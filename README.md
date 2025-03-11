@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/user-attachments/assets/ee3f4caf-10a7-4c58-948d-6a59fda97850" width="600" height="300" alt="Flet OneSignal"></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/ee3f4caf-10a7-4c58-948d-6a59fda97850" width="300" height="150" alt="Flet OneSignal"></p>
 
 
 <h1 align="center"> Flet OneSignal </h1>
