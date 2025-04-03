@@ -7,7 +7,14 @@
 
 Flet OneSignal is an extension for Flet in Python, integrating the OneSignal package from Dart/Flutter. It enables push notifications and messaging for mobile apps, making it easier to connect your iOS and Android applications with OneSignal.
 
-## 📦Installation
+## ☕ Buy Me a Coffee  
+If you liked this project, please consider supporting its development with a donation. Your contribution will help me maintain and improve it.
+
+<a href="https://www.buymeacoffee.com/brunobrown"> 
+<img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-1.svg" width="200" alt="Buy Me a Coffee">
+</a>
+
+## 📦 Installation
 ##### You can install `flet-onesignal` using one of the following package managers:
 
 **POETRY**
@@ -30,7 +37,7 @@ $ uv add flet-onesignal
 
 ---
 
-## 🛠️Example configuration in the `pyproject.toml` file.
+## 🛠️ Configuration in the pyproject.toml file.
 
 [More in ](https://flet.dev/blog/pyproject-toml-support-for-flet-build-command/) Support for flet build command.
 
@@ -57,7 +64,7 @@ dev-dependencies = [
 
 ```
 
-### 🔥Usage example
+## 🔥 Example
 
 ```Python
 import flet as ft
@@ -192,7 +199,7 @@ if __name__ == "__main__":
     ft.app(target=main)
 
 ```
-## 🤝🏽Contributing
+## 🤝🏽 Contributing
 Contributions and feedback are welcome! 
 
 #### To contribute:
