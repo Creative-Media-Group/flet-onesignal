@@ -91,10 +91,21 @@ class OneSignal(Control):
         if self.settings is not None:
             self._set_attr_json("settings", self.settings)
 
-    def get_onesignal_id(self, wait_timeout: Optional[float] = 25):
+    def get_onesignal_id(self, wait_timeout: Optional[float] = 25) -> str:
         """Returns the OneSignal ID for the current user, which may be None."""
 
         result = self.invoke_method(
+            method_name="get_onesignal_id",
+            wait_for_result=True,
+            wait_timeout=wait_timeout
+        )
+
+        return result
+
+    async def get_onesignal_id_async(self, wait_timeout: Optional[float] = 25) -> str:
+        """Returns the OneSignal ID for the current user, which may be None."""
+
+        result = self.invoke_method_async(
             method_name="get_onesignal_id",
             wait_for_result=True,
             wait_timeout=wait_timeout
@@ -113,6 +124,17 @@ class OneSignal(Control):
 
         return result
 
+    async def get_external_user_id_async(self, wait_timeout: Optional[float] = 25):
+        """Returns the External ID for the current user, which may be None."""
+
+        result = self.invoke_method_async(
+            method_name="get_external_user_id",
+            wait_for_result=True,
+            wait_timeout=wait_timeout
+        )
+
+        return result
+
     def login(self, external_user_id: str) -> bool:
         """Login to OneSignal under the user identified by the [external_user_id] provided. The act of logging a user into
         the OneSignal SDK will switch the user context to that specific user."""
@@ -120,12 +142,29 @@ class OneSignal(Control):
         self.invoke_method(
             method_name="login",
             arguments={"external_user_id": external_user_id},
+            wait_for_result=True,
         )
 
         if  self.get_external_user_id():
             return True
 
         return False
+
+    async def login_async(self, external_user_id: str) -> bool:
+        """Login to OneSignal under the user identified by the [external_user_id] provided. The act of logging a user into
+        the OneSignal SDK will switch the user context to that specific user."""
+
+        self.invoke_method(
+            method_name="login",
+            arguments={"external_user_id": external_user_id},
+            wait_for_result=True,
+        )
+
+        if await self.get_external_user_id_async():
+            return True
+
+        return False
+
 
     def logout(self) -> None:
         """Logout the user previously logged in via [login]. The user property now references a new device-scoped user.
@@ -134,6 +173,17 @@ class OneSignal(Control):
 
         self.invoke_method(
             method_name="logout",
+            wait_for_result=True,
+        )
+
+    async def logout_async(self) -> None:
+        """Logout the user previously logged in via [login]. The user property now references a new device-scoped user.
+        A device-scoped user has no user identity that can later be retrieved, except through this device as long as the
+        app remains installed and the app data is not cleared."""
+
+        self.invoke_method_async(
+            method_name="logout",
+            wait_for_result=True,
         )
 
     def add_alias(self, alias: str, id_alias: any) -> None:
@@ -141,13 +191,29 @@ class OneSignal(Control):
         overwritten with the new alias [id]."""
 
         args = {
-            alias: alias,
-            id_alias: id_alias,
+            'alias': alias,
+            'id_alias': id_alias,
         }
 
         self.invoke_method(
             method_name="add_alias",
             arguments=args,
+            wait_for_result=True,
+        )
+
+    async def add_alias_async(self, alias: str, id_alias: any) -> None:
+        """Set an [alias] for the current user. If this [alias] label already exists on this user, it will be
+        overwritten with the new alias [id]."""
+
+        args = {
+            'alias': alias,
+            'id_alias': id_alias,
+        }
+
+        self.invoke_method_async(
+            method_name="add_alias",
+            arguments=args,
+            wait_for_result=True,
         )
 
     def remove_alias(self, alias: str) -> None:
@@ -155,7 +221,17 @@ class OneSignal(Control):
 
         self.invoke_method(
             method_name="remove_alias",
-            arguments={alias: alias},
+            arguments={'alias': alias},
+            wait_for_result=True,
+        )
+
+    async def remove_alias_async(self, alias: str) -> None:
+        """Remove an [alias] from the current user."""
+
+        self.invoke_method_async(
+            method_name="remove_alias",
+            arguments={'alias': alias},
+            wait_for_result=True,
         )
 
     def set_language(self, language_code: str = 'en') -> str:
@@ -167,6 +243,22 @@ class OneSignal(Control):
             self.invoke_method(
                 method_name="set_language",
                 arguments={'language': language_code},
+                wait_for_result=True,
+            )
+            return 'Language set successfully.'
+
+        return 'Language not found.'
+
+    async def set_language_async(self, language_code: str = 'en') -> str:
+        """Sets the user's language.
+        Sets the user's language to [language] this also applies to the email and/or SMS player if those are logged in
+        on the device."""
+
+        if language_code in Language._value2member_map_:
+            self.invoke_method_async(
+                method_name="set_language",
+                arguments={'language': language_code},
+                wait_for_result=True,
             )
             return 'Language set successfully.'
 
@@ -181,6 +273,19 @@ class OneSignal(Control):
             self.invoke_method(
                 method_name="remove_notification",
                 arguments={"notification_id": str(notification_id)},
+                wait_for_result=True,
+            )
+
+    async def remove_notification_async(self, notification_id: int) -> None:
+        """Removes a single notification on Android devices."""
+
+        platform = self.page.platform.value
+
+        if platform == 'android':
+            self.invoke_method_async(
+                method_name="remove_notification",
+                arguments={"notification_id": str(notification_id)},
+                wait_for_result=True,
             )
 
     def remove_grouped_notifications(self, notification_group: str) -> None:
@@ -192,6 +297,19 @@ class OneSignal(Control):
             self.invoke_method(
                 method_name="remove_grouped_notifications",
                 arguments={"notification_group": notification_group},
+                wait_for_result=True,
+            )
+
+    async def remove_grouped_notifications_async(self, notification_group: str) -> None:
+        """Removes a grouped notification on Android devices."""
+
+        platform = self.page.platform.value
+
+        if platform == 'android':
+            self.invoke_method_async(
+                method_name="remove_grouped_notifications",
+                arguments={"notification_group": notification_group},
+                wait_for_result=True,
             )
 
     def clear_all_notifications(self) -> None:
@@ -199,6 +317,15 @@ class OneSignal(Control):
 
         self.invoke_method(
             method_name="clear_all_notifications",
+            wait_for_result=True,
+        )
+
+    async def clear_all_notifications_async(self) -> None:
+        """Removes all OneSignal notifications."""
+
+        self.invoke_method_async(
+            method_name="clear_all_notifications",
+            wait_for_result=True,
         )
 
     def consent_required(self, consent: bool = True) -> None:
@@ -210,37 +337,93 @@ class OneSignal(Control):
         self.invoke_method(
             method_name="consent_required",
             arguments={'data': data_str},
+            wait_for_result=True,
         )
 
-    def request_permission(self, fallback_to_settings: bool = True) -> None:
+    async def consent_required_async(self, consent: bool = True) -> None:
+        """Allows you to completely disable the SDK until your app calls the OneSignal.consentGiven(true) function.
+        This is useful if you want to show a Terms and Conditions or privacy popup for GDPR."""
+
+        data_str = json.dumps({"consent": consent})
+
+        self.invoke_method_async(
+            method_name="consent_required",
+            arguments={'data': data_str},
+            wait_for_result=True,
+        )
+
+    def request_permission(self, fallback_to_settings: bool = True,  wait_timeout: Optional[float] = 25) -> bool:
         """Prompt the user for permission to receive push notifications. This will display the native system prompt to
         request push notification permission."""
 
         data_str = json.dumps({"fallback_to_settings": fallback_to_settings})
 
-        self.invoke_method(
+        result = self.invoke_method(
             method_name="request_permission",
             arguments={'data': data_str},
+            wait_for_result=True,
+            wait_timeout=wait_timeout
         )
 
+        return result == "true"
+
+    async def request_permission_async(self, fallback_to_settings: bool = True,  wait_timeout: Optional[float] = 25) -> bool:
+        """Prompt the user for permission to receive push notifications. This will display the native system prompt to
+        request push notification permission."""
+
+        data_str = json.dumps({"fallback_to_settings": fallback_to_settings})
+
+        result = self.invoke_method_async(
+            method_name="request_permission",
+            arguments={'data': data_str},
+            wait_for_result=True,
+            wait_timeout=wait_timeout
+        )
+
+        return result == "true"
+
     # Métodos para integração com o OneSignal Notifications
-    def register_for_provisional_authorization(self) -> bool:
+    def register_for_provisional_authorization(self, wait_timeout: Optional[float] = 25) -> bool:
         """Instead of having to prompt the user for permission to send them push notifications, your app can request
         provisional authorization."""
 
         result = self.invoke_method(
             method_name="register_for_provisional_authorization",
             wait_for_result=True,
+            wait_timeout=wait_timeout
         )
         return result == "true"
 
-    def can_request_permission(self) -> bool:
+    async def register_for_provisional_authorization_async(self, wait_timeout: Optional[float] = 25) -> bool:
+        """Instead of having to prompt the user for permission to send them push notifications, your app can request
+        provisional authorization."""
+
+        result = self.invoke_method_async(
+            method_name="register_for_provisional_authorization",
+            wait_for_result=True,
+            wait_timeout=wait_timeout
+        )
+        return result == "true"
+
+    def can_request_permission(self, wait_timeout: Optional[float] = 25) -> bool:
         """Whether attempting to request notification permission will show a prompt. Returns true if the device has not
         been prompted for push notification permission already."""
 
         result = self.invoke_method(
             method_name="can_request_permission",
             wait_for_result=True,
+            wait_timeout=wait_timeout
+        )
+        return result == "true"
+
+    async def can_request_permission_async(self, wait_timeout: Optional[float] = 25) -> bool:
+        """Whether attempting to request notification permission will show a prompt. Returns true if the device has not
+        been prompted for push notification permission already."""
+
+        result = self.invoke_method_async(
+            method_name="can_request_permission",
+            wait_for_result=True,
+            wait_timeout=wait_timeout
         )
         return result == "true"
 
@@ -250,6 +433,16 @@ class OneSignal(Control):
 
         self.invoke_method(
             method_name="opt_in",
+            wait_for_result=True,
+        )
+
+    async def opt_in_async(self) -> None:
+        """Call this method to receive push notifications on the device or to resume receiving of push notifications
+        after calling optOut. If needed, this method will prompt the user for push notifications permission."""
+
+        self.invoke_method_async(
+            method_name="opt_in",
+            wait_for_result=True,
         )
 
     def opt_out(self) -> None:
@@ -258,6 +451,16 @@ class OneSignal(Control):
 
         self.invoke_method(
             method_name="opt_in",
+            wait_for_result=True,
+        )
+
+    async def opt_out_async(self) -> None:
+        """If at any point you want the user to stop receiving push notifications on the current device (regardless of
+        system-level permission status), you can call this method to opt out."""
+
+        self.invoke_method_async(
+            method_name="opt_in",
+            wait_for_result=True,
         )
 
     def prevent_default(self, notification_id: str) -> None:

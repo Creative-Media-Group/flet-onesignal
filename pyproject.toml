@@ -28,6 +28,7 @@ Homepage = "https://github.com/brunobrown/flet-onesignal"
 #Documentation = ""
 Repository = "https://github.com/brunobrown/flet-onesignal"
 Issues = "https://github.com/brunobrown/flet-onesignal/issues"
+#Changelog = ""
 
 [tool.uv]
 dev-dependencies = [
