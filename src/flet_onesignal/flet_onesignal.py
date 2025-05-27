@@ -105,7 +105,7 @@ class OneSignal(Control):
     async def get_onesignal_id_async(self, wait_timeout: Optional[float] = 25) -> str:
         """Returns the OneSignal ID for the current user, which may be None."""
 
-        result = self.invoke_method_async(
+        result = await self.invoke_method_async(
             method_name="get_onesignal_id",
             wait_for_result=True,
             wait_timeout=wait_timeout
@@ -127,7 +127,7 @@ class OneSignal(Control):
     async def get_external_user_id_async(self, wait_timeout: Optional[float] = 25):
         """Returns the External ID for the current user, which may be None."""
 
-        result = self.invoke_method_async(
+        result = await self.invoke_method_async(
             method_name="get_external_user_id",
             wait_for_result=True,
             wait_timeout=wait_timeout
@@ -154,7 +154,7 @@ class OneSignal(Control):
         """Login to OneSignal under the user identified by the [external_user_id] provided. The act of logging a user into
         the OneSignal SDK will switch the user context to that specific user."""
 
-        self.invoke_method(
+        await self.invoke_method_async(
             method_name="login",
             arguments={"external_user_id": external_user_id},
             wait_for_result=True,
@@ -181,7 +181,7 @@ class OneSignal(Control):
         A device-scoped user has no user identity that can later be retrieved, except through this device as long as the
         app remains installed and the app data is not cleared."""
 
-        self.invoke_method_async(
+        await self.invoke_method_async(
             method_name="logout",
             wait_for_result=True,
         )
@@ -210,7 +210,7 @@ class OneSignal(Control):
             'id_alias': id_alias,
         }
 
-        self.invoke_method_async(
+        await self.invoke_method_async(
             method_name="add_alias",
             arguments=args,
             wait_for_result=True,
@@ -228,7 +228,7 @@ class OneSignal(Control):
     async def remove_alias_async(self, alias: str) -> None:
         """Remove an [alias] from the current user."""
 
-        self.invoke_method_async(
+        await self.invoke_method_async(
             method_name="remove_alias",
             arguments={'alias': alias},
             wait_for_result=True,
@@ -255,7 +255,7 @@ class OneSignal(Control):
         on the device."""
 
         if language_code in Language._value2member_map_:
-            self.invoke_method_async(
+            await self.invoke_method_async(
                 method_name="set_language",
                 arguments={'language': language_code},
                 wait_for_result=True,
@@ -282,7 +282,7 @@ class OneSignal(Control):
         platform = self.page.platform.value
 
         if platform == 'android':
-            self.invoke_method_async(
+            await self.invoke_method_async(
                 method_name="remove_notification",
                 arguments={"notification_id": str(notification_id)},
                 wait_for_result=True,
@@ -306,7 +306,7 @@ class OneSignal(Control):
         platform = self.page.platform.value
 
         if platform == 'android':
-            self.invoke_method_async(
+            await self.invoke_method_async(
                 method_name="remove_grouped_notifications",
                 arguments={"notification_group": notification_group},
                 wait_for_result=True,
@@ -323,7 +323,7 @@ class OneSignal(Control):
     async def clear_all_notifications_async(self) -> None:
         """Removes all OneSignal notifications."""
 
-        self.invoke_method_async(
+        await self.invoke_method_async(
             method_name="clear_all_notifications",
             wait_for_result=True,
         )
@@ -346,7 +346,7 @@ class OneSignal(Control):
 
         data_str = json.dumps({"consent": consent})
 
-        self.invoke_method_async(
+        await self.invoke_method_async(
             method_name="consent_required",
             arguments={'data': data_str},
             wait_for_result=True,
@@ -373,7 +373,7 @@ class OneSignal(Control):
 
         data_str = json.dumps({"fallback_to_settings": fallback_to_settings})
 
-        result = self.invoke_method_async(
+        result = await self.invoke_method_async(
             method_name="request_permission",
             arguments={'data': data_str},
             wait_for_result=True,
@@ -398,7 +398,7 @@ class OneSignal(Control):
         """Instead of having to prompt the user for permission to send them push notifications, your app can request
         provisional authorization."""
 
-        result = self.invoke_method_async(
+        result = await self.invoke_method_async(
             method_name="register_for_provisional_authorization",
             wait_for_result=True,
             wait_timeout=wait_timeout
@@ -420,7 +420,7 @@ class OneSignal(Control):
         """Whether attempting to request notification permission will show a prompt. Returns true if the device has not
         been prompted for push notification permission already."""
 
-        result = self.invoke_method_async(
+        result = await self.invoke_method_async(
             method_name="can_request_permission",
             wait_for_result=True,
             wait_timeout=wait_timeout
@@ -440,7 +440,7 @@ class OneSignal(Control):
         """Call this method to receive push notifications on the device or to resume receiving of push notifications
         after calling optOut. If needed, this method will prompt the user for push notifications permission."""
 
-        self.invoke_method_async(
+        await self.invoke_method_async(
             method_name="opt_in",
             wait_for_result=True,
         )
@@ -458,7 +458,7 @@ class OneSignal(Control):
         """If at any point you want the user to stop receiving push notifications on the current device (regardless of
         system-level permission status), you can call this method to opt out."""
 
-        self.invoke_method_async(
+        await self.invoke_method_async(
             method_name="opt_in",
             wait_for_result=True,
         )
