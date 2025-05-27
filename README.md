@@ -1,30 +1,35 @@
-# Flet OneSignal
+<p align="center"><img src="https://github.com/user-attachments/assets/ee3f4caf-10a7-4c58-948d-6a59fda97850" width="300" height="150" alt="Flet OneSignal"></p>
 
----
 
-## Description
+<h1 align="center"> Flet OneSignal </h1>
 
-Flutter OneSignal package integration for Python Flet.
+## 📖 Overview
 
-[Flet OneSignal](https://pub.dev/packages?q=flet_onesignal) in the official package repository for Dart and Flutter apps.
+Flet OneSignal is an extension for Flet in Python, integrating the OneSignal package from Dart/Flutter. It enables push notifications and messaging for mobile apps, making it easier to connect your iOS and Android applications with OneSignal.
 
----
+## ☕ Buy Me a Coffee  
+If you liked this project, please consider supporting its development with a donation. Your contribution will help me maintain and improve it.
 
-## Installation
+<a href="https://www.buymeacoffee.com/brunobrown"> 
+<img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-1.svg" width="200" alt="Buy Me a Coffee">
+</a>
 
-**Using POETRY**
+## 📦 Installation
+##### You can install `flet-onesignal` using one of the following package managers:
+
+**POETRY**
 
 ```console
 $ poetry add flet-onesignal
 ```
 
-**Using PIP**
+**PIP**
 
 ```console
 $ pip install flet-onesignal
 ```
 
-**Using UV**
+**UV**
 
 ```console
 $ uv add flet-onesignal
@@ -32,7 +37,7 @@ $ uv add flet-onesignal
 
 ---
 
-## Example configuration in the `pyproject.toml` file.
+## 🛠️ Configuration in the pyproject.toml file.
 
 [More in ](https://flet.dev/blog/pyproject-toml-support-for-flet-build-command/) Support for flet build command.
 
@@ -59,7 +64,7 @@ dev-dependencies = [
 
 ```
 
-### Usage example
+## 🔥 Example
 
 ```Python
 import flet as ft
@@ -194,3 +199,19 @@ if __name__ == "__main__":
     ft.app(target=main)
 
 ```
+## 🤝🏽 Contributing
+Contributions and feedback are welcome! 
+
+#### To contribute:
+
+1. **Fork the repository.**
+2. **Create a feature branch.**
+3. **Submit a pull request with a detailed explanation of your changes.**
+
+---
+
+## 🚀 Try **flet-onesignal** today and enhance your Flet apps with push notifications!🔔 
+
+<img src="https://logging-discord.readthedocs.io/en/latest/img/proverbs_16_3.jpg" width="500">
+
+[Commit your work to the LORD, and your plans will succeed. Proverbs 16: 3](https://www.bible.com/bible/116/PRO.16.NLT)
