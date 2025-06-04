@@ -35,17 +35,14 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
   }
 
   void _initializeOneSignal() {
-    // Acessa o atributo "settings" do controle como uma string JSON
     final settings = widget.control.attrString("settings", "{}")!;
 
-    // Decodifica a string JSON para um Map<String, dynamic>
     Map<String, dynamic> settingsData;
 
     if (settings != "{}") {
       try {
         settingsData = jsonDecode(settings);
         final appId = settingsData["app_id"] ?? "DEFAULT_APP_ID";
-        // Inicializa o OneSignal com o appId
         OneSignal.initialize(appId);
       } catch (error, stackTrace) {
         debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
@@ -60,9 +57,7 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
     }
   }
 
-  /// Configura os listeners para eventos de notificação
   void _setupNotificationHandler() {
-    // Configura o listener para notificações abertas
     OneSignal.Notifications.addClickListener((event) {
       try {
         debugPrint("Notifications-addClickListener");
@@ -88,7 +83,6 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
       }
     });
 
-    // Configura o listener para notificações recebidas
     OneSignal.Notifications.addForegroundWillDisplayListener((event) {
       try {
         debugPrint("Notifications-addForegroundWillDisplayListener");
@@ -97,7 +91,6 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
           "json_data": event.notification.jsonRepresentation(),
         });
 
-        // Envia os dados da notificação recebida para o Flet
         widget.backend.triggerControlEvent(widget.control.id, "notification_opened", jsonData);
 
       } catch (error, stackTrace) {
