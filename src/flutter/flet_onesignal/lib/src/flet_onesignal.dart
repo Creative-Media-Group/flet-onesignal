@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flet/flet.dart';
+import 'package:flet_onesignal/src/utils/funcs.dart';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -34,30 +35,29 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
   }
 
   void _initializeOneSignal() {
-    // Acessa o atributo "settings" do controle como uma string JSON
     final settings = widget.control.attrString("settings", "{}")!;
 
-    // Decodifica a string JSON para um Map<String, dynamic>
     Map<String, dynamic> settingsData;
 
     if (settings != "{}") {
       try {
         settingsData = jsonDecode(settings);
-        final appId = settingsData["app_id"] ??
-            "DEFAULT_APP_ID"; // Valor padrão caso app_id seja nulo
-        // Inicializa o OneSignal com o appId
+        final appId = settingsData["app_id"] ?? "DEFAULT_APP_ID";
         OneSignal.initialize(appId);
-      } catch (error) {
-        debugPrint("Erro: $error");
-        widget.backend
-            .triggerControlEvent(widget.control.id, "error", error.toString());
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "_initializeOneSignal",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
+        );
       }
     }
   }
 
-  //   /// Configura os listeners para eventos de notificação
   void _setupNotificationHandler() {
-    // Configura o listener para notificações abertas
     OneSignal.Notifications.addClickListener((event) {
       try {
         debugPrint("Notifications-addClickListener");
@@ -71,41 +71,36 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
           "notification_received",
           jsonData,
         );
-      } catch (error) {
-        debugPrint("Erro: $error");
-
-        widget.backend.triggerControlEvent(
-          widget.control.id,
-          "error",
-          error.toString(),
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "_setupNotificationHandler",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
         );
       }
     });
 
-    // Configura o listener para notificações recebidas
     OneSignal.Notifications.addForegroundWillDisplayListener((event) {
       try {
         debugPrint("Notifications-addForegroundWillDisplayListener");
-        // Força a exibição da notificação localmente no app
-        // event
-        //     .preventDefault(); // Impede que o OneSignal ignore a exibição padrão
-        // OneSignal.Notifications.displayNotification(
-        //     event.notification.notificationId);
 
         final jsonData = jsonEncode({
           "json_data": event.notification.jsonRepresentation(),
         });
 
-        // Envia os dados da notificação recebida para o Flet
-        widget.backend.triggerControlEvent(
-            widget.control.id, "notification_opened", jsonData);
-      } catch (error) {
-        debugPrint("Error: $error");
+        widget.backend.triggerControlEvent(widget.control.id, "notification_opened", jsonData);
 
-        widget.backend.triggerControlEvent(
-          widget.control.id,
-          "error",
-          error.toString(),
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "_setupNotificationHandler",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
         );
       }
     });
@@ -114,7 +109,6 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
       try {
         debugPrint("InAppMessages-addClickListener");
 
-        // Decodificando as representações JSON para Map
         var messageMap = jsonDecode(event.message.jsonRepresentation());
         var resultMap = jsonDecode(event.result.jsonRepresentation());
 
@@ -125,15 +119,16 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
           }
         });
 
-        widget.backend.triggerControlEvent(
-            widget.control.id, "click_in_app_messages", jsonData);
-      } catch (error) {
-        debugPrint("Error: $error");
+        widget.backend.triggerControlEvent(widget.control.id, "click_in_app_messages", jsonData);
 
-        widget.backend.triggerControlEvent(
-          widget.control.id,
-          "error",
-          error.toString(),
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "_setupNotificationHandler",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
         );
       }
     });
@@ -152,13 +147,14 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
 
         widget.backend.triggerControlEvent(
             widget.control.id, "will_display_in_app_messages", jsonData);
-      } catch (error) {
-        debugPrint("Error: $error");
-
-        widget.backend.triggerControlEvent(
-          widget.control.id,
-          "error",
-          error.toString(),
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "_setupNotificationHandler",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
         );
       }
     });
@@ -177,13 +173,14 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
 
         widget.backend.triggerControlEvent(
             widget.control.id, "did_display_in_app_messages", jsonData);
-      } catch (error) {
-        debugPrint("Error: $error");
-
-        widget.backend.triggerControlEvent(
-          widget.control.id,
-          "error",
-          error.toString(),
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "_setupNotificationHandler",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
         );
       }
     });
@@ -202,13 +199,14 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
 
         widget.backend.triggerControlEvent(
             widget.control.id, "will_dismiss_in_app_messages", jsonData);
-      } catch (error) {
-        debugPrint("Error: $error");
-
-        widget.backend.triggerControlEvent(
-          widget.control.id,
-          "error",
-          error.toString(),
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "_setupNotificationHandler",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
         );
       }
     });
@@ -227,13 +225,14 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
 
         widget.backend.triggerControlEvent(
             widget.control.id, "did_dismiss_in_app_messages", jsonData);
-      } catch (error) {
-        debugPrint("Error: $error");
-
-        widget.backend.triggerControlEvent(
-          widget.control.id,
-          "error",
-          error.toString(),
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "_setupNotificationHandler",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
         );
       }
     });
@@ -241,117 +240,157 @@ class _FletOneSignalControlState extends State<FletOneSignalControl>
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        "OneSignal build: ${widget.control.id} (${widget.control.hashCode})");
+    debugPrint("OneSignal build: ${widget.control.id} (${widget.control.hashCode})");
 
     () async {
-      widget.backend.subscribeMethods(widget.control.id,
-          (methodName, args) async {
-        try {
-          switch (methodName) {
-            case "get_onesignal_id":
-              var result = await OneSignal.User.getOnesignalId() ??
-                  "The OneSignal ID does not exist.";
-              return result;
-
-            case "get_external_user_id":
-              var result = await OneSignal.User.getExternalId() ??
-                  "The external user ID does not yet exist.";
-              return result;
-
-            case "login":
-              var externalUserId = args["external_user_id"] ?? "";
-              OneSignal.login(externalUserId);
-              return null;
-
-            case "logout":
-              OneSignal.logout();
-              return null;
-
-            case "add_alias":
-              String alias = args["alias"] ?? "";
-              dynamic idAlias = args["id_alias"];
-              OneSignal.User.addAlias(alias, idAlias);
-              return null;
-
-            case "remove_alias":
-              String alias = args["alias"] ?? "";
-              OneSignal.User.removeAlias(alias);
-              return null;
-
-            case "set_language":
-              String language = args["language"] ?? "en";
-              OneSignal.User.setLanguage(language);
-              return null;
-
-            case "consent_required":
-              String dataStr =
-                  args["data"]!; // O '!' assume que o valor nunca será nulo
-              Map<String, dynamic> dataMap = json.decode(dataStr);
-              bool consent = dataMap["consent"] as bool;
-              OneSignal.consentRequired(consent);
-              return null;
-
-            case "request_permission":
-              String dataStr =
-                  args["data"]!; // O '!' assume que o valor nunca será nulo
-              Map<String, dynamic> dataMap = json.decode(dataStr);
-              bool fallbackToSettings = dataMap["fallback_to_settings"] as bool;
-              OneSignal.Notifications.requestPermission(fallbackToSettings);
-              return null;
-
-            case "opt_in":
-              OneSignal.User.pushSubscription.optIn();
-              return null;
-
-            case "opt_out":
-              OneSignal.User.pushSubscription.optOut();
-              return null;
-
-            case "register_for_provisional_authorization":
-              var result = await OneSignal.Notifications
-                  .registerForProvisionalAuthorization(true);
-              return result.toString();
-
-            case "can_request_permission":
-              var result = await OneSignal.Notifications.canRequest();
-              return result.toString();
-
-            case "remove_notification":
-              int notificationId = args["notification_id"] as int;
-              OneSignal.Notifications.removeNotification(notificationId);
-              return null;
-
-            case "remove_grouped_notifications":
-              var notificationGroup = args["notification_group"] ?? "";
-              OneSignal.Notifications.removeGroupedNotifications(
-                  notificationGroup);
-              return null;
-
-            case "clear_all_notifications":
-              OneSignal.Notifications.clearAll();
-              return null;
-
-            case "prevent_default":
-              var notificationId = args["notification_id"] ?? "";
-              OneSignal.Notifications.preventDefault(notificationId);
-              return null;
-
-            default:
-              return null;
-          }
-        } catch (error, stackTrace) {
-          debugPrint("Erro no método $methodName: $error\n$stackTrace");
-          widget.backend.triggerControlEvent(
-            widget.control.id,
-            "error",
-            error.toString(),
-          );
-          return error.toString();
-        }
-      });
+      try {
+        widget.backend.subscribeMethods(widget.control.id,
+                (methodName, args) async {
+              try {
+                return switch (methodName) {
+                  "get_onesignal_id" => _getOnesignalId(),
+                  "get_external_user_id" => _getExternalUserId(),
+                  "login" => _login(args),
+                  "logout" => _logout(),
+                  "add_alias" => _addAlias(args),
+                  "remove_alias" => _removeAlias(args),
+                  "set_language" => _setLanguage(args),
+                  "consent_required" => _consentRequired(args),
+                  "request_permission" => _requestPermission(args),
+                  "opt_in" => _optIn(),
+                  "opt_out" => _optOut(),
+                  "register_for_provisional_authorization" => _registerForProvisionalAuthorization(),
+                  "can_request_permission" => _canRequestPermission(),
+                  "remove_notification" => _removeNotification(args),
+                  "remove_grouped_notifications" => _removeGroupedNotifications(args),
+                  "clear_all_notifications" => _clearAllNotifications(),
+                  "prevent_default" => _preventDefault(args),
+                  _ => null,
+                };
+              } catch (error, stackTrace) {
+                debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+                handleFlutterError(
+                  method: methodName,
+                  error: error,
+                  stackTrace: stackTrace,
+                  trigger: widget.backend.triggerControlEvent,
+                  controlId: widget.control.id,
+                );
+                return error.toString();
+              }
+            });
+      } catch (error, stackTrace) {
+        debugPrint("Error:\nerror: $error\nstackTrace: $stackTrace");
+        handleFlutterError(
+          method: "subscribeMethods",
+          error: error,
+          stackTrace: stackTrace,
+          trigger: widget.backend.triggerControlEvent,
+          controlId: widget.control.id,
+        );
+      }
     }();
 
     return const SizedBox.shrink();
+  }
+
+  Future<String?> _getOnesignalId() async {
+    var result = await OneSignal.User.getOnesignalId() ?? "The OneSignal ID does not exist.";
+    return result;
+  }
+
+  Future<String?> _getExternalUserId() async {
+    var result = await OneSignal.User.getExternalId() ?? "The external user ID does not yet exist.";
+    return result;
+  }
+
+  Future<String?> _login(Map<String, dynamic> args) async {
+    var externalUserId = args["external_user_id"] ?? "";
+    await OneSignal.login(externalUserId);
+    return null;
+  }
+
+  Future<String?> _logout() async {
+    await OneSignal.logout();
+    return null;
+  }
+
+  Future<String?> _addAlias(Map<String, dynamic> args) async {
+    String alias = args["alias"] ?? "";
+    dynamic idAlias = args["id_alias"];
+    await OneSignal.User.addAlias(alias, idAlias);
+    return null;
+  }
+
+  Future<String?> _removeAlias(Map<String, dynamic> args) async {
+    String alias = args["alias"] ?? "";
+    await OneSignal.User.removeAlias(alias);
+    return null;
+  }
+
+  Future<String?> _setLanguage(Map<String, dynamic> args) async {
+    String language = args["language"] ?? "en";
+    await OneSignal.User.setLanguage(language);
+    return null;
+  }
+
+  Future<String?> _consentRequired(Map<String, dynamic> args) async {
+    String dataStr = args["data"]!;
+    Map<String, dynamic> dataMap = json.decode(dataStr);
+    bool consent = dataMap["consent"] as bool;
+    await OneSignal.consentRequired(consent);
+    return null;
+  }
+
+  Future<String?> _requestPermission(Map<String, dynamic> args) async {
+    String dataStr = args["data"]!;
+    Map<String, dynamic> dataMap = json.decode(dataStr);
+    bool fallbackToSettings = dataMap["fallback_to_settings"] as bool;
+    var result = await OneSignal.Notifications.requestPermission(fallbackToSettings);
+    return result.toString();
+  }
+
+  Future<String?> _optIn() async {
+    await OneSignal.User.pushSubscription.optIn();
+    return null;
+  }
+
+  Future<String?> _optOut() async {
+    await OneSignal.User.pushSubscription.optOut();
+    return null;
+  }
+
+  Future<String?> _registerForProvisionalAuthorization() async {
+    var result = await OneSignal.Notifications.registerForProvisionalAuthorization(true);
+    return result.toString();
+  }
+
+  Future<String?> _canRequestPermission() async {
+    var result = await OneSignal.Notifications.canRequest();
+    return result.toString();
+  }
+
+  Future<String?> _removeNotification(Map<String, dynamic> args) async {
+    int notificationId = args["notification_id"] as int;
+    await OneSignal.Notifications.removeNotification(notificationId);
+    return null;
+  }
+
+  Future<String?> _removeGroupedNotifications(Map<String, dynamic> args) async {
+    var notificationGroup = args["notification_group"] ?? "";
+    await OneSignal.Notifications.removeGroupedNotifications(
+        notificationGroup);
+    return null;
+  }
+
+  Future<String?> _clearAllNotifications() async {
+    await OneSignal.Notifications.clearAll();
+    return null;
+  }
+
+  Future<String?> _preventDefault(Map<String, dynamic> args) async {
+    var notificationId = args["notification_id"] ?? "";
+    OneSignal.Notifications.preventDefault(notificationId);
+    return null;
   }
 }

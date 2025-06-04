@@ -1,13 +1,15 @@
 [project]
 name = "flet-onesignal"
-version = "0.3.1"
+version = "0.3.3"
 description = "Flutter OneSignal package integration for Python Flet."
+requires-python = ">=3.9"
 readme = "README.md"
 authors = [
     { name = "brunobrown", email = "brunobrown.86@gmail.com" }
 ]
+license = "MIT"
+license-files = ["LICENSE"]
 
-requires-python = ">=3.9"
 dependencies = [
     "flet>=0.26.0",
 ]
@@ -17,10 +19,13 @@ classifiers = [
     "Intended Audience :: Developers",
     "Natural Language :: English",
     "Natural Language :: Portuguese (Brazilian)",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Development Status :: 5 - Production/Stable",
-    "Programming Language :: Python :: 3.12"
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 
 [project.urls]
@@ -28,16 +33,16 @@ Homepage = "https://github.com/brunobrown/flet-onesignal"
 #Documentation = ""
 Repository = "https://github.com/brunobrown/flet-onesignal"
 Issues = "https://github.com/brunobrown/flet-onesignal/issues"
+#Changelog = ""
 
 [tool.uv]
 dev-dependencies = [
     "flet[all]>=0.26.0",
 ]
 
-[tool.setuptools]
-#packages = ["flet_onesignal"]
-#package-dir = {"" = "src"}
-license-files = []
+#[tool.setuptools]
+##packages = ["flet_onesignal"]
+##package-dir = {"" = "src"}
 
 [tool.setuptools.package-data]
 "flutter.flet_onesignal" = ["**/*"]
